@@ -1,6 +1,7 @@
 CREATE TABLE user (
   id int unsigned primary key auto_increment not null,
   email varchar(255) not null unique,
+  username varchar(100) not null unique,
   password varchar(255) not null,
   is_admin boolean not null default false,
   is_public boolean not null default true,
@@ -13,7 +14,7 @@ CREATE TABLE user_game (
   status ENUM('wishlist', 'owned', 'playing', 'completed', 'abandoned', 'platinum'),
   comment text,
   added_at datetime default current_timestamp,
-  foreign key(user_id) references user(id),
+  foreign key(user_id) references user(id) on delete cascade,
   primary key(user_id, external_id)
 );
 
