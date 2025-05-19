@@ -69,7 +69,7 @@ class UserRepository {
     );
 
     const user = rows[0];
-    if (!user) return undefined;
+    if (!user) return null;
 
     return {
       id: user.id,

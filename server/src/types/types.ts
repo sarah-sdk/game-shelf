@@ -6,3 +6,16 @@ export type User = {
   isAdmin: boolean;
   isPublic: boolean;
 };
+
+export type UserGame = {
+  userId: number;
+  externalId: number;
+  status:
+    | "wishlist"
+    | "owned"
+    | "playing"
+    | "completed"
+    | "abandoned"
+    | "platinum";
+  comment: string;
+};
