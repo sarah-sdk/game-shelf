@@ -1,21 +1,20 @@
-create table user (
+CREATE TABLE user (
   id int unsigned primary key auto_increment not null,
   email varchar(255) not null unique,
-  password varchar(255) not null
+  username varchar(100) not null unique,
+  password varchar(255) not null,
+  is_admin boolean not null default false,
+  is_public boolean not null default true,
+  created_at timestamp default current_timestamp not null
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
+CREATE TABLE user_game (
   user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+  external_id varchar(50) not null,
+  status ENUM('wishlist', 'owned', 'playing', 'completed', 'abandoned', 'platinum'),
+  comment text,
+  added_at datetime default current_timestamp,
+  foreign key(user_id) references user(id) on delete cascade,
+  primary key(user_id, external_id)
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
-
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
